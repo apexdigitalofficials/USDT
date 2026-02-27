@@ -327,10 +327,19 @@ fetch('reviews.json')
     const container=document.getElementById("reviewContainer");
     container.innerHTML="";
 
-    const reviewsToShow = data.slice(0,6);
-    const loopReviews = [...reviewsToShow, ...reviewsToShow];
+    // Add ALL reviews
+    data.forEach(review=>{
+        const div=document.createElement("div");
+        div.className="review-card";
+        div.innerHTML=`
+            <div class="review-name">${review.name}</div>
+            <div class="review-text">${review.text}</div>
+        `;
+        container.appendChild(div);
+    });
 
-    loopReviews.forEach(review=>{
+    // Duplicate ALL reviews for infinite smooth scroll
+    data.forEach(review=>{
         const div=document.createElement("div");
         div.className="review-card";
         div.innerHTML=`
@@ -343,7 +352,7 @@ fetch('reviews.json')
     let scrollAmount = 0;
 
     function autoScroll(){
-        scrollAmount += 0.5;
+        scrollAmount += 0.4; // speed
         container.scrollLeft = scrollAmount;
 
         if(scrollAmount >= container.scrollWidth / 2){
