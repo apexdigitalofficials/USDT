@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>APEX DIGITAL OFFICIALS | USDT OTC Desk</title>
+<title>APEX DIGITAL OFFICIALS | USDT Desk</title>
 
 <style>
 *{
@@ -103,6 +103,7 @@ body{
 /* REVIEWS */
 .reviews{
     margin-bottom:60px;
+    overflow:hidden;
 }
 
 .reviews h3{
@@ -114,8 +115,8 @@ body{
 .review-grid{
     display:flex;
     gap:20px;
-    overflow:hidden;
-    position:relative;
+    width:max-content;
+    animation: scrollReviews 35s linear infinite;
 }
 
 .review-card{
@@ -124,7 +125,6 @@ body{
     padding:20px;
     border-radius:12px;
     border-left:4px solid #00ff99;
-    flex-shrink:0;
 }
 
 .review-name{
@@ -135,6 +135,11 @@ body{
 .review-text{
     font-size:14px;
     color:#dddddd;
+}
+
+@keyframes scrollReviews{
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
 }
 
 /* REVIEW FORM */
@@ -223,7 +228,6 @@ footer{
 
 <div class="rules">
     <h3>🔐 STRICT RULES – KINDLY READ BEFORE PERFORMING TRANSACTIONS</h3>
-
     • Follow strict rules before buying USDT<br>
 
     <div class="section-gap">
@@ -236,20 +240,20 @@ footer{
 
     <div class="section-gap">
     • 📄 Required documents:<br>
-      &nbsp;&nbsp;– Full Name (must match Binance verified identity)<br>
-      &nbsp;&nbsp;– Binance UID + Wallet Address<br>
-      &nbsp;&nbsp;– Email ID<br>
-      &nbsp;&nbsp;– Contact Number
+      – Full Name (must match Binance verified identity)<br>
+      – Binance UID + Wallet Address<br>
+      – Email ID<br>
+      – Contact Number
     </div>
 
     <div class="section-gap">
-    • 🛡️ All transactions are 100% legitimate & properly documented for legal purposes<br>
+    • 🛡️ All transactions are 100% legitimate & properly documented<br>
     • ❌ No third-party payments allowed<br>
     • ✅ Binance verified name & bank account name must match<br>
-    • 💳 Funds sent must be legitimate from your own account<br>
+    • 💳 Funds must be from your own account<br>
     • 📸 <span class="highlight">After payment, send screenshot on WhatsApp</span><br>
-    • 🚀 Once funds are received & verified, digital assets will be released<br>
-    • ⚖️ Any fraudulent transaction will result in strict legal action<br>
+    • 🚀 Assets released after verification<br>
+    • ⚖️ Fraudulent transactions will result in legal action<br>
     • 🚫 Service strictly for legitimate buyers only
     </div>
 </div>
@@ -260,38 +264,7 @@ footer{
     <div class="review-grid" id="reviewContainer"></div>
 </div>
 
-<!-- REVIEW SUBMISSION -->
-<div class="review-submit">
-    <h3>Submit Your Review</h3>
-
-<iframe name="hidden_iframe" style="display:none;"></iframe>
-
-<form action="https://docs.google.com/forms/d/e/1FAIpQLSeyNJOVvEAL8A7NpHMqbL266wX8pDdfalWxqKduWpz6d63kPw/formResponse"
-      method="POST"
-      target="hidden_iframe"
-      onsubmit="showSuccess()">
-
-<input type="text"
-       name="entry.2128005786"
-       placeholder="Your Name"
-       required>
-
-<textarea name="entry.1098585507"
-          placeholder="Your Review"
-          required></textarea>
-
-<button type="submit">Submit Review</button>
-</form>
-
-<p id="successMsg" style="display:none;color:#00ff99;margin-top:10px;">
-Thank you. Your review has been submitted for approval.
-</p>
-
-<p style="font-size:12px;margin-top:10px;color:#aaa;">
-Reviews are moderated and will appear after approval.
-</p>
-</div>
-
+<!-- CONTACT -->
 <div class="contact">
     <a href="https://wa.me/+971567243309" target="_blank" class="whatsapp">WhatsApp</a>
     <a href="mailto:apexdigitalofficials@gmail.com" class="email">Email</a>
@@ -325,9 +298,8 @@ fetch('reviews.json')
 .then(res=>res.json())
 .then(data=>{
     const container=document.getElementById("reviewContainer");
-    container.innerHTML="";
 
-    // Add ALL reviews
+    // Add all reviews
     data.forEach(review=>{
         const div=document.createElement("div");
         div.className="review-card";
@@ -338,7 +310,7 @@ fetch('reviews.json')
         container.appendChild(div);
     });
 
-    // Duplicate ALL reviews for infinite smooth scroll
+    // Duplicate all for smooth infinite scroll
     data.forEach(review=>{
         const div=document.createElement("div");
         div.className="review-card";
@@ -348,27 +320,7 @@ fetch('reviews.json')
         `;
         container.appendChild(div);
     });
-
-    let scrollAmount = 0;
-
-    function autoScroll(){
-        scrollAmount += 0.4; // speed
-        container.scrollLeft = scrollAmount;
-
-        if(scrollAmount >= container.scrollWidth / 2){
-            scrollAmount = 0;
-        }
-
-        requestAnimationFrame(autoScroll);
-    }
-
-    autoScroll();
-})
-.catch(()=>console.log("No reviews found."));
-
-function showSuccess(){
-    document.getElementById("successMsg").style.display="block";
-}
+});
 </script>
 
 </body>
