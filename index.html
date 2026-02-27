@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>APEX DIGITAL OFFICIALS | USDT OTC Desk</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#0c1b2a,#102b3f);
+    color:#ffffff;
+}
+
+.wrapper{
+    max-width:1100px;
+    margin:auto;
+    padding:40px 20px;
+}
+
+/* HEADER */
+.header{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.header h1{
+    font-size:32px;
+    letter-spacing:1px;
+}
+
+.header p{
+    color:#00e6a8;
+    margin-top:8px;
+    font-weight:500;
+}
+
+/* PRICE CARD */
+.price-card{
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(15px);
+    padding:35px;
+    border-radius:15px;
+    text-align:center;
+    box-shadow:0 0 25px rgba(0,255,170,0.15);
+    margin-bottom:40px;
+}
+
+.price-title{
+    font-size:18px;
+    color:#bbbbbb;
+}
+
+.price-value{
+    font-size:50px;
+    font-weight:bold;
+    color:#00ff99;
+    margin:15px 0;
+}
+
+.market-note{
+    font-size:14px;
+    color:#ffcc00;
+}
+
+.datetime{
+    margin-top:15px;
+    font-size:14px;
+    color:#cccccc;
+}
+
+/* RULES */
+.rules{
+    background:rgba(255,255,255,0.04);
+    padding:30px;
+    border-radius:15px;
+    line-height:1.9;
+    font-size:14px;
+    margin-bottom:50px;
+}
+
+.rules h3{
+    text-align:center;
+    margin-bottom:20px;
+    color:#00e6a8;
+}
+
+/* REVIEWS DISPLAY */
+.reviews{
+    margin-bottom:50px;
+}
+
+.reviews h3{
+    text-align:center;
+    margin-bottom:25px;
+    color:#00e6a8;
+}
+
+.review-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
+}
+
+.review-card{
+    background:rgba(255,255,255,0.05);
+    padding:20px;
+    border-radius:12px;
+    border-left:4px solid #00ff99;
+}
+
+.review-name{
+    font-weight:600;
+    margin-bottom:8px;
+}
+
+.review-text{
+    font-size:14px;
+    color:#dddddd;
+}
+
+/* REVIEW SUBMIT */
+.review-submit{
+    margin-top:60px;
+    text-align:center;
+}
+
+.review-submit h3{
+    margin-bottom:20px;
+    color:#00e6a8;
+}
+
+.review-submit input,
+.review-submit textarea{
+    width:100%;
+    max-width:400px;
+    margin:10px auto;
+    display:block;
+    padding:10px;
+    border-radius:8px;
+    border:none;
+}
+
+.review-submit button{
+    padding:10px 20px;
+    border:none;
+    border-radius:8px;
+    background:#00e6a8;
+    font-weight:600;
+    cursor:pointer;
+}
+
+/* CONTACT */
+.contact{
+    margin-top:40px;
+    text-align:center;
+}
+
+.contact a{
+    display:inline-block;
+    margin:8px;
+    padding:12px 20px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:600;
+    transition:0.3s ease;
+}
+
+.whatsapp{background:#25D366;color:white;}
+.email{background:#ff4d4d;color:white;}
+.telegram{background:#0088cc;color:white;}
+
+.contact a:hover{
+    transform:scale(1.05);
+}
+
+footer{
+    margin-top:60px;
+    text-align:center;
+    font-size:13px;
+    color:#aaaaaa;
+}
+
+@media(max-width:768px){
+    .price-value{font-size:38px;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<div class="header">
+    <h1>APEX DIGITAL OFFICIALS</h1>
+    <p>USDT OTC DESK</p>
+</div>
+
+<div class="price-card">
+    <div class="price-title">USDT Price of the Day</div>
+    <div class="price-value">₹ <span id="usdtPrice">97.00</span></div>
+    <div class="market-note">⚠ Price may change as per market movement</div>
+    <div class="datetime" id="datetime"></div>
+</div>
+
+<div class="rules">
+    <h3>🔐 STRICT RULES – KINDLY READ</h3>
+    • Minimum purchase: $25<br>
+    • New buyers limit: $200 per day<br>
+    • Higher cap opens for verified regular buyers<br>
+    • Bulk rates vary based on volume<br>
+    • Full Name (Binance verified), UID & Wallet required<br>
+    • Binance verified name & bank account must match<br>
+    • No third-party payments allowed<br>
+    • Funds must originate from buyer’s own account<br>
+    • Assets released after verification<br>
+    • Fraudulent transactions will result in strict legal action<br>
+    • Service strictly for legitimate buyers only
+</div>
+
+<!-- APPROVED REVIEWS DISPLAY -->
+<div class="reviews">
+    <h3>Client Reviews</h3>
+    <div class="review-grid" id="reviewContainer"></div>
+</div>
+
+<!-- REVIEW SUBMISSION (GOOGLE FORM BACKEND) -->
+<div class="review-submit">
+    <h3>Submit Your Review</h3>
+
+    <!-- Hidden iframe -->
+<iframe name="hidden_iframe" style="display:none;"></iframe>
+
+<form action="https://docs.google.com/forms/d/e/1FAIpQLSeyNJOVvEAL8A7NpHMqbL266wX8pDdfalWxqKduWpz6d63kPw/formResponse"
+      method="POST"
+      target="hidden_iframe"
+      onsubmit="showSuccess()">
+
+<input type="text"
+       name="entry.2128005786"
+       placeholder="Your Name"
+       required
+       style="padding:10px;width:100%;max-width:400px;margin:10px auto;display:block;border-radius:6px;border:none;">
+
+<textarea name="entry.1098585507"
+          placeholder="Your Review"
+          required
+          style="padding:10px;width:100%;max-width:400px;margin:10px auto;display:block;border-radius:6px;border:none;">
+</textarea>
+
+<button type="submit"
+        style="padding:10px 20px;border:none;border-radius:6px;background:#00e6a8;font-weight:600;cursor:pointer;">
+Submit Review
+</button>
+
+</form>
+
+<p id="successMsg" style="display:none;color:#00ff99;margin-top:10px;">
+Thank you. Your review has been submitted for approval.
+</p>
+
+    <p style="font-size:12px;margin-top:10px;color:#aaa;">
+        Reviews are moderated and will appear after approval.
+    </p>
+</div>
+
+<div class="contact">
+    <a href="https://wa.me/971567243309" target="_blank" class="whatsapp">WhatsApp</a>
+    <a href="mailto:apexdigitalofficials@gmail.com" class="email">Email</a>
+    <a href="https://t.me/Apexdigitalofficials" target="_blank" class="telegram">Telegram</a>
+</div>
+
+<footer>
+© 2026 APEX DIGITAL OFFICIALS | All Rights Reserved
+</footer>
+
+</div>
+
+<script>
+
+// Date & Time
+function updateDateTime(){
+    const now=new Date();
+    const d=String(now.getDate()).padStart(2,'0');
+    const m=String(now.getMonth()+1).padStart(2,'0');
+    const y=now.getFullYear();
+    let h=now.getHours();
+    const min=String(now.getMinutes()).padStart(2,'0');
+    const s=String(now.getSeconds()).padStart(2,'0');
+    const ampm=h>=12?'PM':'AM';
+    h=h%12||12;
+    document.getElementById("datetime").innerHTML=
+        `${d}/${m}/${y} | ${h}:${min}:${s} ${ampm}`;
+}
+setInterval(updateDateTime,1000);
+updateDateTime();
+
+// Load Approved Reviews from reviews.json
+fetch('reviews.json')
+.then(res=>res.json())
+.then(data=>{
+    const container=document.getElementById("reviewContainer");
+    data.forEach(review=>{
+        const div=document.createElement("div");
+        div.className="review-card";
+        div.innerHTML=`
+            <div class="review-name">${review.name}</div>
+            <div class="review-text">${review.text}</div>
+        `;
+        container.appendChild(div);
+    });
+})
+.catch(()=>console.log("No reviews found."));
+  function showSuccess(){
+    document.getElementById("successMsg").style.display="block";
+}
+</script>
+
+</body>
+</html>
