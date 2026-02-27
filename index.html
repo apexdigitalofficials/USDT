@@ -49,7 +49,7 @@ body{
     border-radius:15px;
     text-align:center;
     box-shadow:0 0 25px rgba(0,255,170,0.15);
-    margin-bottom:40px;
+    margin-bottom:50px;
 }
 
 .price-title{
@@ -58,7 +58,7 @@ body{
 }
 
 .price-value{
-    font-size:50px;
+    font-size:48px;
     font-weight:bold;
     color:#00ff99;
     margin:15px 0;
@@ -82,18 +82,27 @@ body{
     border-radius:15px;
     line-height:1.9;
     font-size:14px;
-    margin-bottom:50px;
+    margin-bottom:60px;
 }
 
 .rules h3{
     text-align:center;
-    margin-bottom:20px;
+    margin-bottom:25px;
     color:#00e6a8;
 }
 
-/* REVIEWS DISPLAY */
+.section-gap{
+    margin-top:18px;
+}
+
+.highlight{
+    color:#00ff99;
+    font-weight:600;
+}
+
+/* REVIEWS */
 .reviews{
-    margin-bottom:50px;
+    margin-bottom:60px;
 }
 
 .reviews h3{
@@ -125,7 +134,7 @@ body{
     color:#dddddd;
 }
 
-/* REVIEW SUBMIT */
+/* REVIEW FORM */
 .review-submit{
     margin-top:60px;
     text-align:center;
@@ -158,7 +167,7 @@ body{
 
 /* CONTACT */
 .contact{
-    margin-top:40px;
+    margin-top:50px;
     text-align:center;
 }
 
@@ -188,7 +197,7 @@ footer{
 }
 
 @media(max-width:768px){
-    .price-value{font-size:38px;}
+    .price-value{font-size:36px;}
 }
 </style>
 </head>
@@ -199,7 +208,7 @@ footer{
 
 <div class="header">
     <h1>APEX DIGITAL OFFICIALS</h1>
-    <p>USDT OTC DESK</p>
+    <p>USDT DESK</p>
 </div>
 
 <div class="price-card">
@@ -210,31 +219,49 @@ footer{
 </div>
 
 <div class="rules">
-    <h3>🔐 STRICT RULES – KINDLY READ</h3>
-    • Minimum purchase: $25<br>
-    • New buyers limit: $200 per day<br>
-    • Higher cap opens for verified regular buyers<br>
-    • Bulk rates vary based on volume<br>
-    • Full Name (Binance verified), UID & Wallet required<br>
-    • Binance verified name & bank account must match<br>
-    • No third-party payments allowed<br>
-    • Funds must originate from buyer’s own account<br>
-    • Assets released after verification<br>
-    • Fraudulent transactions will result in strict legal action<br>
-    • Service strictly for legitimate buyers only
+    <h3>🔐 STRICT RULES – KINDLY READ BEFORE PERFORMING TRANSACTIONS</h3>
+
+    • Follow strict rules before buying USDT<br>
+
+    <div class="section-gap">
+    • 💰 Minimum purchase: $25<br>
+    • 📊 New buyers limit: $200 per day<br>
+    • 👑 Higher cap (no limit) opens only for regular verified buyers<br>
+    • 💱 For USDT price of the day, kindly check on this page
+    • 📦 Bulk order rates vary depending on volume
+    </div>
+
+    <div class="section-gap">
+    • 📄 Required documents:<br>
+      &nbsp;&nbsp;– Full Name (must match Binance verified identity)<br>
+      &nbsp;&nbsp;– Binance UID + Wallet Address<br>
+      &nbsp;&nbsp;– Email ID<br>
+      &nbsp;&nbsp;– Contact Number
+    </div>
+
+    <div class="section-gap">
+    • 🛡️ All transactions are 100% legitimate & properly documented for legal purposes<br>
+    • ❌ No third-party payments allowed<br>
+    • ✅ Binance verified name & bank account name must match<br>
+    • 💳 Funds sent must be legitimate from your own account<br>
+    • 📸 <span class="highlight">After payment, send screenshot on WhatsApp</span><br>
+    • 🚀 Once funds are received & verified, digital assets will be released<br>
+    • ⚖️ Any fraudulent, fake, or mismatched transaction will result in strict legal action<br>
+    • 🚫 This service is strictly for legitimate buyers only — fake inquiries, scammers, or anyone attempting fraud will face immediate legal action
+    </div>
+
 </div>
 
-<!-- APPROVED REVIEWS DISPLAY -->
+<!-- REVIEWS -->
 <div class="reviews">
     <h3>Client Reviews</h3>
     <div class="review-grid" id="reviewContainer"></div>
 </div>
 
-<!-- REVIEW SUBMISSION (GOOGLE FORM BACKEND) -->
+<!-- REVIEW SUBMISSION -->
 <div class="review-submit">
     <h3>Submit Your Review</h3>
 
-    <!-- Hidden iframe -->
 <iframe name="hidden_iframe" style="display:none;"></iframe>
 
 <form action="https://docs.google.com/forms/d/e/1FAIpQLSeyNJOVvEAL8A7NpHMqbL266wX8pDdfalWxqKduWpz6d63kPw/formResponse"
@@ -245,19 +272,13 @@ footer{
 <input type="text"
        name="entry.2128005786"
        placeholder="Your Name"
-       required
-       style="padding:10px;width:100%;max-width:400px;margin:10px auto;display:block;border-radius:6px;border:none;">
+       required>
 
 <textarea name="entry.1098585507"
           placeholder="Your Review"
-          required
-          style="padding:10px;width:100%;max-width:400px;margin:10px auto;display:block;border-radius:6px;border:none;">
-</textarea>
+          required></textarea>
 
-<button type="submit"
-        style="padding:10px 20px;border:none;border-radius:6px;background:#00e6a8;font-weight:600;cursor:pointer;">
-Submit Review
-</button>
+<button type="submit">Submit Review</button>
 
 </form>
 
@@ -265,13 +286,13 @@ Submit Review
 Thank you. Your review has been submitted for approval.
 </p>
 
-    <p style="font-size:12px;margin-top:10px;color:#aaa;">
-        Reviews are moderated and will appear after approval.
-    </p>
+<p style="font-size:12px;margin-top:10px;color:#aaa;">
+Reviews are moderated and will appear after approval.
+</p>
 </div>
 
 <div class="contact">
-    <a href="https://wa.me/971567243309" target="_blank" class="whatsapp">WhatsApp</a>
+    <a href="https://wa.me/+971567243309" target="_blank" class="whatsapp">WhatsApp</a>
     <a href="mailto:apexdigitalofficials@gmail.com" class="email">Email</a>
     <a href="https://t.me/Apexdigitalofficials" target="_blank" class="telegram">Telegram</a>
 </div>
@@ -283,8 +304,6 @@ Thank you. Your review has been submitted for approval.
 </div>
 
 <script>
-
-// Date & Time
 function updateDateTime(){
     const now=new Date();
     const d=String(now.getDate()).padStart(2,'0');
@@ -301,7 +320,6 @@ function updateDateTime(){
 setInterval(updateDateTime,1000);
 updateDateTime();
 
-// Load Approved Reviews from reviews.json
 fetch('reviews.json')
 .then(res=>res.json())
 .then(data=>{
@@ -317,7 +335,8 @@ fetch('reviews.json')
     });
 })
 .catch(()=>console.log("No reviews found."));
-  function showSuccess(){
+
+function showSuccess(){
     document.getElementById("successMsg").style.display="block";
 }
 </script>
