@@ -115,7 +115,7 @@ body{
     display:flex;
     gap:20px;
     overflow:hidden;
-    scroll-behavior:smooth;
+    position:relative;
 }
 
 .review-card{
@@ -223,7 +223,9 @@ footer{
 
 <div class="rules">
     <h3>🔐 STRICT RULES – KINDLY READ BEFORE PERFORMING TRANSACTIONS</h3>
+
     • Follow strict rules before buying USDT<br>
+
     <div class="section-gap">
     • 💰 Minimum purchase: $25<br>
     • 📊 New buyers limit: $200 per day<br>
@@ -231,6 +233,7 @@ footer{
     • 💱 For USDT price of the day, kindly check on this page<br>
     • 📦 Bulk order rates vary depending on volume
     </div>
+
     <div class="section-gap">
     • 📄 Required documents:<br>
       &nbsp;&nbsp;– Full Name (must match Binance verified identity)<br>
@@ -238,6 +241,7 @@ footer{
       &nbsp;&nbsp;– Email ID<br>
       &nbsp;&nbsp;– Contact Number
     </div>
+
     <div class="section-gap">
     • 🛡️ All transactions are 100% legitimate & properly documented for legal purposes<br>
     • ❌ No third-party payments allowed<br>
@@ -250,9 +254,42 @@ footer{
     </div>
 </div>
 
+<!-- REVIEWS -->
 <div class="reviews">
     <h3>Client Reviews</h3>
     <div class="review-grid" id="reviewContainer"></div>
+</div>
+
+<!-- REVIEW SUBMISSION -->
+<div class="review-submit">
+    <h3>Submit Your Review</h3>
+
+<iframe name="hidden_iframe" style="display:none;"></iframe>
+
+<form action="https://docs.google.com/forms/d/e/1FAIpQLSeyNJOVvEAL8A7NpHMqbL266wX8pDdfalWxqKduWpz6d63kPw/formResponse"
+      method="POST"
+      target="hidden_iframe"
+      onsubmit="showSuccess()">
+
+<input type="text"
+       name="entry.2128005786"
+       placeholder="Your Name"
+       required>
+
+<textarea name="entry.1098585507"
+          placeholder="Your Review"
+          required></textarea>
+
+<button type="submit">Submit Review</button>
+</form>
+
+<p id="successMsg" style="display:none;color:#00ff99;margin-top:10px;">
+Thank you. Your review has been submitted for approval.
+</p>
+
+<p style="font-size:12px;margin-top:10px;color:#aaa;">
+Reviews are moderated and will appear after approval.
+</p>
 </div>
 
 <div class="contact">
@@ -290,8 +327,10 @@ fetch('reviews.json')
     const container=document.getElementById("reviewContainer");
     container.innerHTML="";
 
-    // Add all reviews
-    data.forEach(review=>{
+    const reviewsToShow = data.slice(0,6);
+    const loopReviews = [...reviewsToShow, ...reviewsToShow];
+
+    loopReviews.forEach(review=>{
         const div=document.createElement("div");
         div.className="review-card";
         div.innerHTML=`
@@ -301,25 +340,14 @@ fetch('reviews.json')
         container.appendChild(div);
     });
 
-    // Duplicate ALL reviews for infinite scroll
-    data.forEach(review=>{
-        const div=document.createElement("div");
-        div.className="review-card";
-        div.innerHTML=`
-            <div class="review-name">${review.name}</div>
-            <div class="review-text">${review.text}</div>
-        `;
-        container.appendChild(div);
-    });
-
-    let scrollPosition = 0;
+    let scrollAmount = 0;
 
     function autoScroll(){
-        scrollPosition += 0.4;   // speed (increase for faster)
-        container.scrollLeft = scrollPosition;
+        scrollAmount += 0.5;
+        container.scrollLeft = scrollAmount;
 
-        if(scrollPosition >= container.scrollWidth / 2){
-            scrollPosition = 0;
+        if(scrollAmount >= container.scrollWidth / 2){
+            scrollAmount = 0;
         }
 
         requestAnimationFrame(autoScroll);
@@ -327,7 +355,7 @@ fetch('reviews.json')
 
     autoScroll();
 })
-.catch(err=>console.log("Review load error:", err));
+.catch(()=>console.log("No reviews found."));
 
 function showSuccess(){
     document.getElementById("successMsg").style.display="block";
