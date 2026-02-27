@@ -112,16 +112,19 @@ body{
 }
 
 .review-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    display:flex;
     gap:20px;
+    overflow:hidden;
+    position:relative;
 }
 
 .review-card{
+    min-width:300px;
     background:rgba(255,255,255,0.05);
     padding:20px;
     border-radius:12px;
     border-left:4px solid #00ff99;
+    flex-shrink:0;
 }
 
 .review-name{
@@ -227,7 +230,7 @@ footer{
     • 💰 Minimum purchase: $25<br>
     • 📊 New buyers limit: $200 per day<br>
     • 👑 Higher cap (no limit) opens only for regular verified buyers<br>
-    • 💱 For USDT price of the day, kindly check on this page
+    • 💱 For USDT price of the day, kindly check on this page<br>
     • 📦 Bulk order rates vary depending on volume
     </div>
 
@@ -246,10 +249,9 @@ footer{
     • 💳 Funds sent must be legitimate from your own account<br>
     • 📸 <span class="highlight">After payment, send screenshot on WhatsApp</span><br>
     • 🚀 Once funds are received & verified, digital assets will be released<br>
-    • ⚖️ Any fraudulent, fake, or mismatched transaction will result in strict legal action<br>
-    • 🚫 This service is strictly for legitimate buyers only — fake inquiries, scammers, or anyone attempting fraud will face immediate legal action
+    • ⚖️ Any fraudulent transaction will result in strict legal action<br>
+    • 🚫 Service strictly for legitimate buyers only
     </div>
-
 </div>
 
 <!-- REVIEWS -->
@@ -279,7 +281,6 @@ footer{
           required></textarea>
 
 <button type="submit">Submit Review</button>
-
 </form>
 
 <p id="successMsg" style="display:none;color:#00ff99;margin-top:10px;">
@@ -324,7 +325,12 @@ fetch('reviews.json')
 .then(res=>res.json())
 .then(data=>{
     const container=document.getElementById("reviewContainer");
-    data.forEach(review=>{
+    container.innerHTML="";
+
+    const reviewsToShow = data.slice(0,6);
+    const loopReviews = [...reviewsToShow, ...reviewsToShow];
+
+    loopReviews.forEach(review=>{
         const div=document.createElement("div");
         div.className="review-card";
         div.innerHTML=`
@@ -333,6 +339,21 @@ fetch('reviews.json')
         `;
         container.appendChild(div);
     });
+
+    let scrollAmount = 0;
+
+    function autoScroll(){
+        scrollAmount += 0.5;
+        container.scrollLeft = scrollAmount;
+
+        if(scrollAmount >= container.scrollWidth / 2){
+            scrollAmount = 0;
+        }
+
+        requestAnimationFrame(autoScroll);
+    }
+
+    autoScroll();
 })
 .catch(()=>console.log("No reviews found."));
 
